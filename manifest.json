@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "X GitHub Favorites",
+  "version": "0.2.0",
+  "description": "阅读 X 时一键将 GitHub 仓库、帖子原文与来源收藏到飞书多维表格。",
+  "minimum_chrome_version": "120",
+  "permissions": ["storage", "alarms", "declarativeNetRequest"],
+  "host_permissions": ["https://x.com/*", "https://twitter.com/*", "https://base-api.feishu.cn/*", "https://t.co/*", "https://github.com/*"],
+  "background": {"service_worker": "background.js", "type": "module"},
+  "content_scripts": [{"matches": ["https://x.com/*", "https://twitter.com/*"], "js": ["content.js"], "run_at": "document_idle"}],
+  "action": {"default_popup": "popup.html", "default_title": "GitHub Favorites"},
+  "options_page": "options.html",
+  "content_security_policy": {"extension_pages": "script-src 'self'; object-src 'none'"}
+}

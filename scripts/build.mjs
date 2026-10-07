@@ -1,0 +1,10 @@
+import {build} from 'esbuild';
+import {mkdir,copyFile,readdir} from 'node:fs/promises';
+await mkdir('dist',{recursive:true});
+await build({entryPoints:['src/background/index.ts'],outfile:'dist/background.js',bundle:true,format:'esm',target:'chrome120',legalComments:'none'});
+await build({entryPoints:['src/content/index.ts'],outfile:'dist/content.js',bundle:true,format:'iife',target:'chrome120',legalComments:'none'});
+for(const page of ['options','popup','detail'])await build({entryPoints:['src/ui/'+page+'.ts'],outfile:'dist/'+page+'.js',bundle:true,format:'esm',target:'chrome120',legalComments:'none'});
+for(const file of await readdir('static'))await copyFile('static/'+file,'dist/'+file);
+await copyFile('src/ui/styles.css','dist/styles.css');
+await copyFile('manifest.json','dist/manifest.json');
+console.log('已构建 dist：MV3 后台、内容脚本、设置、弹窗与详情。');

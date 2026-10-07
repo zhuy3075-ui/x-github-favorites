@@ -1,0 +1,20 @@
+{
+  "name": "x-github-favorites",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "build": "node scripts/build.mjs",
+    "check:manifest": "node scripts/check-manifest.mjs"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.3.4",
+    "@types/node": "^26.6.4",
+    "esbuild": "^0.28.2",
+    "fake-indexeddb": "^6.2.5",
+    "linkedom": "^0.18.13",
+    "typescript": "^7.0.2"
+  }
+}
